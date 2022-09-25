@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <form action="/" method="post">
+       {% csrf_token %}
+       {% for categorie in categories %}
+            <input type='checkbox' name={{categorie}}/>
+            <label for="categorie">{{categorie}}</label>
+        {% endfor %}
+       <input type="submit" value="valider">
+    </form>
+
+</body>
+</html>

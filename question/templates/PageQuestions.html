@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<body>
+{{questions}}
+{% for question in questions %}
+<form action="{% url 'question:id' question.id %}" method="post">
+   {% csrf_token %}
+   <h1>Hello World! {{question.id}}</h1>
+   <input type="submit" value="valider">
+</form>
+{% endfor %}
+
+</body>
+</html>
