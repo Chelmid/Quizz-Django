@@ -1,14 +1,37 @@
 <!DOCTYPE html>
 <html>
+    {% load static %}
+    <head>
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    </head>
 <body>
-    <form action="/" method="post">
+    <form action="{% url 'question:id' 'question' %}" method="post">
        {% csrf_token %}
-       {% for categorie in categories %}
-            <input type='checkbox' name={{categorie}}/>
-            <label for="categorie">{{categorie}}</label>
-        {% endfor %}
+       <div class="multiselect">
+       <label for="theme">Choisir le thème:</label>
+       <div onclick="showCheckboxes()">
+            <select id="theme" name='theme' >
+            </select>
+        </div>
+        <div id="checkboxes">
+            {% for keyCategorie,valueCategorie in categories.items %}
+                <div>
+                    <label for={{valueCategorie}}>
+                        <input type="checkbox" name={{valueCategorie}} id={{valueCategorie}}/>{{keyCategorie}}
+                </div>
+            {% endfor %}
+        </div>
+         </div>
+
+        <label for="level">Choisir le niveau de difficuté:</label>
+        <select id="level" name='level'>
+          <option value="easy">facile</option>
+          <option value="medium">moyen</option>
+          <option value="hard">difficile</option>
+        </select>
+          
        <input type="submit" value="valider">
     </form>
-
+    <script src="{% static 'js/main.js'%}"></script>
 </body>
 </html>

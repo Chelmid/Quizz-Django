@@ -4,5 +4,5 @@ app_name = 'question'
 
 urlpatterns = [
     path('', views.index, name='index'),
-    #path('<question_id>', views.id, name='id')
+    path('<question_id>', views.id, name='id')
 ]

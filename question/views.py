@@ -14,6 +14,8 @@ def index(request):
 
 def id(request, question_id):
   
+  print(request.POST)
+  
   template = loader.get_template('PageQuestions.html')
   context = {
     'questions': fetchApiQuestions(),
