@@ -10,3 +10,11 @@ function showCheckboxes() {
     expanded = false;
   }
 }
+
+let nbQuestion = document.getElementById("nbQuestion");
+let limit = document.getElementById("limit");
+limit.innerHTML = nbQuestion.value
+
+nbQuestion.addEventListener("change", () => {
+  limit.innerHTML = nbQuestion.value
+})

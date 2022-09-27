@@ -5,20 +5,18 @@ from api.api import fetchApiQuestions, categories
 
 def index(request):
   
-  template = loader.get_template('PageChoices.html')
+  template = loader.get_template('pageChoices.html')
   context = {
     'categories': categories()
   }
   return HttpResponse(template.render(context,request))
 
 
-def id(request, question_id):
+def question(request, question_id):
   
-  print(request.POST)
-  
-  template = loader.get_template('PageQuestions.html')
+  template = loader.get_template('pageQuestions.html')
   context = {
-    'questions': fetchApiQuestions(),
+    'question': fetchApiQuestions(request.POST),
   }
   return HttpResponse(template.render(context,request))
 

@@ -1,0 +1,17 @@
+<html>
+    {% load static %}
+    <head>
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    </head>
+<body>
+    <div>
+        {% block ChoicesOption %}
+        {% endblock %}
+
+        {% block questions %}
+        {% endblock %}
+    </div>
+    <script src="{% static 'js/main.js'%}"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</body>
+</html>

@@ -1,14 +1,28 @@
-<!DOCTYPE html>
-<html>
-<body>
-{{questions}}
-{% for question in questions %}
-<form action="{% url 'question:id' question.id %}" method="post">
+{% extends "pageBase.html" %}
+
+{% block ChoicesOption %}
+{{question}}
+
+<form action="{% url 'question:question' 1 %}" method="post">
    {% csrf_token %}
-   <h1>Hello World! {{question.id}}</h1>
+      <h1>{{question.category}}</h1>
+      <h1>{{question.question}}</h1>
+      <h1>{{question.tags}}</h1>
+      <h1>{{question.type}}</h1>
+      <h1>{{question.difficulty}}</h1>
+      <h1>{{question.correctAnswer}}</h1>
+      <h1>{{question.incorrectAnswers}}</h1>
+
+      <label for="response">
+         <input type="radio" name="response" />{{question.correctAnswer}}
+      </label>
+      {% for otherResponse in question.incorrectAnswers%}
+      <label for="response">
+         <input type="radio" name="response" />{{otherResponse}}
+      </label>
+      {% endfor %}
+
    <input type="submit" value="valider">
 </form>
-{% endfor %}
 
-</body>
-</html>
+{% endblock  %}

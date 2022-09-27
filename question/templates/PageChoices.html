@@ -1,37 +1,44 @@
-<!DOCTYPE html>
-<html>
-    {% load static %}
-    <head>
-        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-    </head>
-<body>
-    <form action="{% url 'question:id' 'question' %}" method="post">
-       {% csrf_token %}
-       <div class="multiselect">
-       <label for="theme">Choisir le thème:</label>
-       <div onclick="showCheckboxes()">
-            <select id="theme" name='theme' >
-            </select>
-        </div>
-        <div id="checkboxes">
-            {% for keyCategorie,valueCategorie in categories.items %}
-                <div>
-                    <label for={{valueCategorie}}>
-                        <input type="checkbox" name={{valueCategorie}} id={{valueCategorie}}/>{{keyCategorie}}
-                </div>
-            {% endfor %}
-        </div>
-         </div>
+{% extends "pageBase.html" %}
 
-        <label for="level">Choisir le niveau de difficuté:</label>
-        <select id="level" name='level'>
-          <option value="easy">facile</option>
-          <option value="medium">moyen</option>
-          <option value="hard">difficile</option>
-        </select>
-          
-       <input type="submit" value="valider">
+{% block ChoicesOption %}
+  <div class="grid grid-flow-row-dense grid-cols-3">
+    <div class="col-span-3">
+    <form action="{% url 'question:question' 'question' %}" method="post" class="text-center">
+        {% csrf_token %}
+        <div class="multiselect">
+          <div class="selectBox" onclick="showCheckboxes()">
+            <select>
+              <option>Choisir un thème</option>
+            </select>
+            <div class="overSelect" class="m-auto"></div>
+          </div>
+          <div id="checkboxes">
+            {% for keyCategorie,valueCategorie in categories.items %}
+                <label for={{valueCategorie}}>
+                    <input type="checkbox" id={{valueCategorie}} name={{valueCategorie}} class="text-left">{{keyCategorie}}</label>
+            {% endfor %}
+          </div>
+        </div>
+        <div>
+          <label for="difficulty">Choisir le niveau de difficuté:</label>
+          <select id="difficulty" name='difficulty'>
+            <option value="">Choisir le niveau
+            <option value="easy">facile</option>
+            <option value="medium">moyen</option>
+            <option value="hard">difficile</option>
+          </select>
+        </div>
+        <div>
+            <label for="nbQuestion">Nombre de question</label>
+            <div>
+                <input type="range" id="limit" name="limit" 
+                    min="1" max="20" value="5" step="1">
+                </div>
+            <div id="limit"></div>
+        </div>
+
+       <input type="submit" value="valider" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
     </form>
-    <script src="{% static 'js/main.js'%}"></script>
-</body>
-</html>
+    </div>
+  </div>
+{% endblock %}
