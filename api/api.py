@@ -1,9 +1,13 @@
+from this import d
 import requests
 import json
 import random
 
+saveURL = ""
+
+# call api with parameter
 def fetchApiQuestions(request):
-    
+
     categories = []
     difficulty = ''
     limit = ""
@@ -13,7 +17,7 @@ def fetchApiQuestions(request):
         if datas[1] == "on" :
             categories.append(datas[0])
         else : 
-            if datas[0] == 'level' :
+            if datas[0] == 'difficulty' :
                 difficulty = datas[1]
             if datas[0] == 'limit' :
                 limit = datas[1]
@@ -25,13 +29,16 @@ def fetchApiQuestions(request):
             apiURL = "?categories=" + (",".join(categories)) + '&limit=' + limit + '&difficulty=' + difficulty
         else :
             apiURL = "?categories=" + (",".join(categories)) + '&limit=' + limit
-    
+
+    global saveURL
+    saveURL = apiURL
     res = requests.get('https://the-trivia-api.com/api/questions' + apiURL)
     
     response = json.loads(res.text)
-    
-    return response[random.randint(0, len(response))]
+    return response[random.randint(0, len(response) -1)]
 
+
+# call api parameter categories
 def categories():
     tab = {}
     res = requests.get('https://the-trivia-api.com/api/categories')
@@ -46,3 +53,11 @@ def categories():
                     tab.update({resultat : value })
                     
     return tab
+
+def nextQuestion() :
+    global saveURL
+    res = requests.get('https://the-trivia-api.com/api/questions' + saveURL)
+    
+    response = json.loads(res.text)
+    
+    return response[random.randint(0, len(response) -1)]

@@ -1,26 +1,20 @@
 {% extends "pageBase.html" %}
 
-{% block ChoicesOption %}
-{{question}}
+{% block question %}
 
-<form action="{% url 'question:question' 1 %}" method="post">
+<form action="{% url 'quizz:response' 'response' %}" method="post">
    {% csrf_token %}
-      <h1>{{question.category}}</h1>
-      <h1>{{question.question}}</h1>
-      <h1>{{question.tags}}</h1>
-      <h1>{{question.type}}</h1>
-      <h1>{{question.difficulty}}</h1>
-      <h1>{{question.correctAnswer}}</h1>
-      <h1>{{question.incorrectAnswers}}</h1>
+   <div>La categorie de la question : {{displayQuestion.category}}</div>
+   <div>La question : {{displayQuestion.question}}</div>
+   <div>Le niveau de la question : {{displayQuestion.difficulty}}</div>
 
-      <label for="response">
-         <input type="radio" name="response" />{{question.correctAnswer}}
+   {% for choiceResponse in choicesResponses%}
+   <div>
+      <label for={{choiceResponse}}>
+         <input type="radio" class="proposition" name={{choiceResponse}} />{{choiceResponse}}
       </label>
-      {% for otherResponse in question.incorrectAnswers%}
-      <label for="response">
-         <input type="radio" name="response" />{{otherResponse}}
-      </label>
-      {% endfor %}
+   </div>
+   {% endfor %}
 
    <input type="submit" value="valider">
 </form>

@@ -1,0 +1,14 @@
+{% extends "pageBase.html" %}
+
+{% block response %}
+
+<div>
+    <form action="{% url 'quizz:question' 'question' %}" method='POST'>
+        {% csrf_token %}
+        <label for='test'>
+            <input hidden type="text" id='next' name='next'></label>
+        <input type='submit' value='Suivant' />
+    </form>
+</div>
+
+{% endblock  %}

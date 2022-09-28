@@ -1,3 +1,4 @@
+// select option selected
 let expanded = false;
 
 function showCheckboxes() {
@@ -11,10 +12,21 @@ function showCheckboxes() {
   }
 }
 
+// limit slider display umber question
 let nbQuestion = document.getElementById("nbQuestion");
 let limit = document.getElementById("limit");
-limit.innerHTML = nbQuestion.value
 
-nbQuestion.addEventListener("change", () => {
-  limit.innerHTML = nbQuestion.value
-})
+if(window.location.pathname === '/quizz/') {
+  nbQuestion.innerHTML = limit.value;
+
+  limit.addEventListener("change", () => {
+    nbQuestion.innerHTML = limit.value;
+  })
+}
+
+
+// selected response
+let proposition = document.querySelectorAll("propositon");
+
+
+console.log(proposition)
