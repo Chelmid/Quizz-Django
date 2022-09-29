@@ -3,7 +3,7 @@
 {% block ChoicesOption %}
   <div class="grid grid-flow-row-dense grid-cols-3">
     <div class="col-span-3">
-    <form action="{% url 'quizz:question' 'question' %}" method="post" class="text-center">
+    <form action="{% url 'quizz:question' %}" method="post" class="text-center">
         {% csrf_token %}
         <div class="multiselect">
           <div class="selectBox" onclick="showCheckboxes()">

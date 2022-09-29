@@ -3,9 +3,11 @@
 {% block response %}
 
 <div>
-    <form action="{% url 'quizz:question' 'question' %}" method='POST'>
+    <form action="{% url 'quizz:question' %}" method='POST'>
         {% csrf_token %}
-        <label for='test'>
+        <div>La reponse est : {{response}}</div>
+        <div>Votre score est : {{score}}</div>
+        <label for='next'>
             <input hidden type="text" id='next' name='next'></label>
         <input type='submit' value='Suivant' />
     </form>

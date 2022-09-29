@@ -2,13 +2,14 @@
 
 {% block question %}
 
-<form action="{% url 'quizz:response' 'response' %}" method="post">
+<form action="{% url 'quizz:response' %}" method="post">
    {% csrf_token %}
    <div>La categorie de la question : {{displayQuestion.category}}</div>
    <div>La question : {{displayQuestion.question}}</div>
    <div>Le niveau de la question : {{displayQuestion.difficulty}}</div>
 
-   {% for choiceResponse in choicesResponses%}
+   {{choicesResponses}}
+   {% for choiceResponse in choicesResponses %}
    <div>
       <label for={{choiceResponse}}>
          <input type="radio" class="proposition" name={{choiceResponse}} />{{choiceResponse}}

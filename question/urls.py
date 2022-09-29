@@ -3,7 +3,8 @@ from . import views
 app_name = 'quizz'
 
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('<question>', views.question, name='question'),
-    path('question/<response>', views.response, name='response')
+    path('index', views.index, name='index'),
+    path('question', views.question, name='question'),
+    path('response', views.response, name='response'),
+    path('result', views.result, name='result')
 ]
