@@ -6,7 +6,7 @@
     <form action="{% url 'quizz:question' %}" method='POST'>
         {% csrf_token %}
         <div>La reponse est : {{response}}</div>
-        <div>Votre score est : {{score}}</div>
+        <div>Votre score est : {{score}} point(s)</div>
         <label for='next'>
             <input hidden type="text" id='next' name='next'></label>
         <input type='submit' value='Suivant' />

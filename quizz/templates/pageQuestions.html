@@ -2,22 +2,22 @@
 
 {% block question %}
 
-<form action="{% url 'quizz:response' %}" method="post">
+<form action="{% url 'quizz:response' %}" method="post" id="response">
    {% csrf_token %}
    <div>La categorie de la question : {{displayQuestion.category}}</div>
    <div>La question : {{displayQuestion.question}}</div>
    <div>Le niveau de la question : {{displayQuestion.difficulty}}</div>
 
-   {{choicesResponses}}
    {% for choiceResponse in choicesResponses %}
    <div>
       <label for={{choiceResponse}}>
-         <input type="radio" class="proposition" name={{choiceResponse}} />{{choiceResponse}}
+         <input type="radio" class="proposition" name="proposition" />{{choiceResponse}}
       </label>
    </div>
    {% endfor %}
+   <div id="messageError"></div>
 
-   <input type="submit" value="valider">
+   <button id="valider" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">valider</button>
 </form>
 
 {% endblock  %}

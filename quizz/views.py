@@ -2,8 +2,10 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.template import loader
 from api.api import fetchApiQuestions, categories, nextQuestion
+from .models import UserName
 
 import random
+import datetime
 
 saveQuestionResponse = {}
 saveResponse = ""
@@ -46,17 +48,28 @@ def question(request):
     
   else :
     
-    limit = (request.POST).get("limit")
-    dataQuestion = fetchApiQuestions(request.POST)
+    if(len(UserName.objects.filter(name=request.POST.get("name"))) > 0) :
+      template = loader.get_template('pageChoicesOptions.html')
+      context = {
+        'messageError' : 'le pseudo est déjà utilisé'
+      }
+      return redirect('http://127.0.0.1:8000/quizz/index', messageError = "messageError")
     
-    for datas in dataQuestion.items() :
-      if datas[0] == 'correctAnswer' :
-        mixedResponses.append(datas[1])
-        saveResponse = datas[1]
-      if datas[0] == 'incorrectAnswers' :
-        for responses in datas[1] :
-          mixedResponses.append(responses)
-    counter += 1
+    else :
+      limit = (request.POST).get("limit")
+      dataQuestion = fetchApiQuestions(request.POST)
+      
+      save = UserName(name=(request.POST).get("name"), date=datetime.datetime.now(),scoreMax=0 )
+      save.save()
+      
+      for datas in dataQuestion.items() :
+        if datas[0] == 'correctAnswer' :
+          mixedResponses.append(datas[1])
+          saveResponse = datas[1]
+        if datas[0] == 'incorrectAnswers' :
+          for responses in datas[1] :
+            mixedResponses.append(responses)
+      counter += 1
     
   shuffle = random.sample(mixedResponses, len(mixedResponses))
   
@@ -77,18 +90,17 @@ def response(request):
   
   for key, value in request.POST.items() :
     if key == saveResponse:
-      print(score)
-      print(saveResponse)
       score += 1
   
   if int(limit) <= counter :
     template = loader.get_template('pageResult.html')
     limit = 0
     counter = 0
-    context = {
-      
+    context = { 
+      'score': score
     }
     return HttpResponse(template.render(context,request))
+  
   else : 
     template = loader.get_template('pageResponse.html')
     context = {
