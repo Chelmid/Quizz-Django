@@ -4,7 +4,13 @@
 
 <div>
     <div>Ton score est de {{score}} point(s)</div>
-    <a href="{% url 'quizz:index' %}" class="buttom" > Retour
+    <a href="{% url 'quizz:index' %}" class="buttom" > Retour </a>
+    <form action="{% url 'quizz:question' %}" method='POST' id='continue'>
+        {% csrf_token %}
+        <label for='next'>
+            <input hidden type="text" id='next' name='next'></label>
+        <button id="valider">Continue</button>
+    </form>
 </div>
 
 {% endblock %}
