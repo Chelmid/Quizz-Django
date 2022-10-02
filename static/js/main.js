@@ -1,18 +1,27 @@
 let expanded = false;
 
-function showCheckboxes() {
-  let checkboxes = document.getElementById("checkboxes");
+function showThemes() {
+  let checkboxesThemes = document.getElementById("checkboxesThemes");
   if (!expanded) {
-    checkboxes.style.display = "block";
+    checkboxesThemes.style.display = "block";
     expanded = true;
   } else {
-    checkboxes.style.display = "none";
+    checkboxesThemes.style.display = "none";
     expanded = false;
   }
 }
 
-let valider = document.getElementById('valider')
-let messageError = document.getElementById('messageError')
+function showLevel() {
+  let checkboxesLevel = document.getElementById("checkboxesLevel");
+  if (checkboxesLevel.style.display === "block") {
+    checkboxesLevel.style.display = "none";
+  } else {
+    checkboxesLevel.style.display = "block";
+  }
+}
+
+let valider = document.getElementById('valider');
+let messageError = document.getElementById('messageError');
 
 // limit slider display umber question
 let nbQuestion = document.getElementById("nbQuestion");
@@ -26,25 +35,25 @@ if(window.location.pathname === '/quizz/index') {
     nbQuestion.innerHTML = limit.value;
   })
 
-  let option = document.getElementById('option')
-  let checkName = document.getElementById('name')
+  let option = document.getElementById('option');
+  let checkName = document.getElementById('name');
 
   //control pseudo empty onSubmit
   valider.addEventListener('click', (e) => {
-    e.preventDefault()
+    e.preventDefault();
     if(checkName.value === ""){
-      messageError.innerHTML = 'Remplir ce champs'
+      messageError.innerHTML = 'Remplir ce champs';
     }else{
-      option.submit()
+      option.submit();
     }
   })
 
   //control pseudo empty
   checkName.addEventListener('change', (e) => {
     if(checkName.value === ""){
-      messageError.innerHTML = 'Remplir ce champs'
+      messageError.innerHTML = 'Remplir ce champs';
     }else{
-      messageError.innerHTML = ''
+      messageError.innerHTML = '';
     }
   })
 }
@@ -54,15 +63,25 @@ if(window.location.pathname === '/quizz/question') {
   let response = document.getElementById("response");
   let proposition = document.querySelectorAll(".proposition");
 
+  // remove error if not empty
+  //bug
+  // response.addEventListener('change', (e) => {
+  //   if(e.target.checked === true){
+  //     messageError.innerHTML = "";
+  //   }
+  // })
+
   // check radio is true
   valider.addEventListener('click', (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     proposition.forEach((selectResponse) => {
-      if(selectResponse.checked === true){
-        response.submit()
+
+      if(selectResponse.checked === false){
+          messageError.innerHTML = 'Selectionner une reponse';
       }else{
-        messageError.innerHTML = 'selectionner une reponse'
+        messageError.innerHTML =  "";
+        response.submit();
       }
     })
   })

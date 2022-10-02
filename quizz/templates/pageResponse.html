@@ -2,14 +2,14 @@
 
 {% block response %}
 
-<div>
-    <form action="{% url 'quizz:question' %}" method='POST'>
+<div class="border-2 border-blue-500 m-auto p-5 rounded-md w-96">
+    <form action="{% url 'quizz:question' %}" method='POST' class="text-center m-5" id="response">
         {% csrf_token %}
         <div>La reponse est : {{response}}</div>
         <div>Votre score est : {{score}} point(s)</div>
         <label for='next'>
             <input hidden type="text" id='next' name='next'></label>
-        <input type='submit' value='Suivant' />
+        <button id="valider" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mt-2">Suivant</button>
     </form>
 </div>
 

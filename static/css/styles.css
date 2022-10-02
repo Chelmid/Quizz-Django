@@ -20,15 +20,32 @@
   bottom: 0;
 }
 
-#checkboxes {
-  display: none;
-  border: 1px #dadada solid;
+.checkboxesLevel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
 }
 
-#checkboxes label {
+#checkboxesLevel {
+  display: none;
+  /*border: 1px #dadada solid;*/
+}
+
+#checkboxesLevel label {
   display: block;
 }
 
-#checkboxes label:hover {
+#checkboxesThemes {
+  display: none;
+  /*border: 1px #dadada solid;*/
+}
+
+#checkboxesThemes label {
+  display: block;
+}
+
+#checkboxesTheme label:hover {
   background-color: #1e90ff;
 }

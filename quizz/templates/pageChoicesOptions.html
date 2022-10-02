@@ -1,40 +1,52 @@
 {% extends "pageBase.html" %}
 
 {% block ChoicesOption %}
-  <div class="grid grid-flow-row-dense grid-cols-3">
-    <div class="col-span-3">
-    <form action="{% url 'quizz:question' %}" method="post" class="text-center" id="option">
+  <div class="border-2 border-blue-500 m-auto p-5 rounded-md w-96">
+    <form action="{% url 'quizz:question' %}" method="post" class="text-center m-5" id="option">
         {% csrf_token %}
         <label for="name">Mettre un pseudo</label>
             <div>
-                <input type="text" id="name" name="name" />
+                <input type="text" id="name" name="name" class="border-2 border-blue-500"/>
                 <div id="messageError"></div>
                   {{messageError}}
             </div>
+
         <div class="multiselect">
-          <div class="selectBox" onclick="showCheckboxes()">
-            <select>
-              <option>Choisir un thème</option>
+          <div class="selectBox" onclick="showThemes()">
+            <select class="p-2">
+              <option class="text-center">Choisir un thème</option>
             </select>
-            <div class="overSelect" class="m-auto"></div>
+            <div class="overSelect" class=""></div>
           </div>
-          <div id="checkboxes">
+          <div id="checkboxesThemes" class="bg-sky-50">
             {% for keyOption ,valueOption in options.items %}
-                <label for={{valueOption}}>
-                    <input type="checkbox" id={{valueOption}} name={{valueOption}} class="text-left">{{keyOption}}</label>
+                <label for={{valueOption}} class="text-left p-1.5">
+                    <input type="checkbox" id="{{valueOption}}" name="{{valueOption}}" class="mx-1"/>{{keyOption}}
+                  </label>
             {% endfor %}
           </div>
         </div>
-        <div>
-          <label for="difficulty">Choisir le niveau de difficuté:</label>
-          <select id="difficulty" name='difficulty'>
-            <option value="">Choisir le niveau
-            <option value="easy">facile</option>
-            <option value="medium">moyen</option>
-            <option value="hard">difficile</option>
-          </select>
+
+        <div class="multiselect">
+          <div class="selectBox" onclick="showLevel()">
+            <select class="p-2">
+              <option class="text-center">Niveau de difficuté :</option>
+            </select>
+            <div class="overSelect"></div>
+          </div>
+          <div id="checkboxesLevel" class="bg-sky-50">
+                <label for="difficulty" class="text-left p-1.5">
+                  <input type="radio" id="easy" name="difficulty" value="easy" class="mx-1"/>facile
+                </label>
+                <label for="difficulty" class="text-left p-1.5">
+                  <input type="radio" id="medium" name="difficulty" value="medium" class="mx-1"/>moyen
+                </label>
+                <label for="difficulty" class="text-left p-1.5">
+                  <input type="radio" id="hard" name="difficulty" value="hard" class="mx-1"/>difficile
+                </label>
+          </div>
         </div>
-        <div>
+        <div class="p-2">
             <label for="limit">Nombre de question : <span id="nbQuestion"></span></label>
             <div>
                 <input type="range" id="limit" name="limit" 
@@ -42,8 +54,7 @@
             </div>
         </div>
 
-       <button id="valider" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">valider</button>
+       <button id="valider" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mt-2">valider</button>
     </form>
-    </div>
   </div>
 {% endblock %}

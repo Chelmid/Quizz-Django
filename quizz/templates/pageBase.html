@@ -2,22 +2,29 @@
     {% load static %}
     <head>
         <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+        <script src="https://cdn.tailwindcss.com"></script>
     </head>
 <body>
-    <div>
-        {% block ChoicesOption %}
-        {% endblock %}
 
-        {% block question %}
-        {% endblock %}
+    <div class="place-content-center">
+        <div>
+            <h1 class="text-center text-3xl font-large font-bold m-5">Quizz</h1>
+        </div>
 
-        {% block response %}
-        {% endblock %}
+            {% block ChoicesOption %}
+            {% endblock %}
 
-        {% block result %}
-        {% endblock %}
+            {% block question %}
+            {% endblock %}
+
+            {% block response %}
+            {% endblock %}
+
+            {% block result %}
+            {% endblock %}
+
     </div>
     <script src="{% static 'js/main.js'%}"></script>
-    {% comment %} <script src="https://cdn.tailwindcss.com"></script> {% endcomment %}
+    
 </body>
 </html>

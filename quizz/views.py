@@ -57,10 +57,11 @@ def question(request):
     
     else :
       limit = (request.POST).get("limit")
+      print(request.POST)
       dataQuestion = fetchApiQuestions(request.POST)
       
-      save = UserName(name=(request.POST).get("name"), date=datetime.datetime.now(),scoreMax=0 )
-      save.save()
+      # save = UserName(name=(request.POST).get("name"), date=datetime.datetime.now(),scoreMax=0 )
+      # save.save()
       
       for datas in dataQuestion.items() :
         if datas[0] == 'correctAnswer' :
