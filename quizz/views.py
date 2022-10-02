@@ -97,7 +97,8 @@ def response(request):
     template = loader.get_template('pageResult.html')
     limit = 0
     counter = 0
-    context = { 
+    context = {
+      'response' : saveResponse,
       'score': score
     }
     return HttpResponse(template.render(context,request))

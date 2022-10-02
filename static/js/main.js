@@ -64,25 +64,25 @@ if(window.location.pathname === '/quizz/question') {
   let proposition = document.querySelectorAll(".proposition");
 
   // remove error if not empty
-  //bug
-  // response.addEventListener('change', (e) => {
-  //   if(e.target.checked === true){
-  //     messageError.innerHTML = "";
-  //   }
-  // })
+  response.addEventListener('change', (e) => {
+    if(e.target.checked === true){
+      return messageError.innerHTML = "";
+    }
+  })
 
   // check radio is true
   valider.addEventListener('click', (e) => {
     e.preventDefault();
-
+    checking = []
     proposition.forEach((selectResponse) => {
 
-      if(selectResponse.checked === false){
-          messageError.innerHTML = 'Selectionner une reponse';
-      }else{
-        messageError.innerHTML =  "";
-        response.submit();
-      }
+    checking.push(selectResponse.checked);
+    console.log(checking)
     })
+    if(checking.includes(true) === true){
+      response.submit();
+    }else{
+      messageError.innerHTML = 'Veuillez sélectionner une réponse'
+    }
   })
 }

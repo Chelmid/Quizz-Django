@@ -3,7 +3,9 @@
 {% block result %}
 
     <div class="border-2 border-blue-500 m-auto p-5 rounded-md w-96 text-center">
-        <div class="m-5">Ton score est de {{score}} point(s)</div>
+        <div>La reponse est : {{response}}</div>
+        <div class="m-1">Ton score est de {{score}} point(s)</div>
+        <div class="m-1">La partie est fini</div>
         <div class="flex flex-wrap">
             <a href="{% url 'quizz:index' %}" class="m-auto" ><button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"> Retour </button></a>
             <form action="{% url 'quizz:question' %}" method='POST' id='continue' class="m-auto">
@@ -13,6 +15,7 @@
                 <button id="valider" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Continue</button>
             </form>
         </div>
+        
     </div>
 
 {% endblock %}
