@@ -16,6 +16,8 @@ score = 0
 
 #pageChoicesOptions
 def index(request):
+  global score
+  score = 0
   
   template = loader.get_template('pageChoicesOptions.html')
   context = {
@@ -89,8 +91,9 @@ def response(request):
   global score
   global saveResponse
   
-  for key, value in request.POST.items() :
-    if key == saveResponse:
+  for keyReponse, value in request.POST.items() :
+    if keyReponse == saveResponse:
+      print('function')
       score += 1
   
   if int(limit) <= counter :
@@ -113,8 +116,6 @@ def response(request):
 
 #pageResult
 def result(request):
-  global score
-  score = 0
   
   template = loader.get_template('pageChoicesOptions.html')
   

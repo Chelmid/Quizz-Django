@@ -20,7 +20,7 @@
             {% for choiceResponse in choicesResponses %}
             <div class="text-center py-1.5 my-2">
                <label for={{choiceResponse}}>
-                  <input type="radio" class="proposition mx-1" name="proposition"/>{{choiceResponse}}
+                  <input type="radio" class="proposition mx-1" name="{{choiceResponse}}"/>{{choiceResponse}}
                </label>
             </div>
             {% endfor %}
