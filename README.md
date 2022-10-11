@@ -12,7 +12,7 @@ Les languages et api utilissés :
 * python ( Django )
 * Tailwind
 * API question
-* sqlite
+* sqlite3
 
 Commande pour démarrer:
 > py manage.py runserver   
