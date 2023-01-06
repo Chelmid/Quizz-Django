@@ -49,7 +49,6 @@ def question(request):
     counter += 1
     
   else :
-    
     if(len(UserName.objects.filter(name=request.POST.get("name"))) > 0) :
       template = loader.get_template('pageChoicesOptions.html')
       context = {
@@ -59,12 +58,10 @@ def question(request):
     
     else :
       limit = (request.POST).get("limit")
-      print(request.POST)
       dataQuestion = fetchApiQuestions(request.POST)
       
       # save = UserName(name=(request.POST).get("name"), date=datetime.datetime.now(),scoreMax=0 )
       # save.save()
-      
       for datas in dataQuestion.items() :
         if datas[0] == 'correctAnswer' :
           mixedResponses.append(datas[1])
@@ -93,12 +90,10 @@ def response(request):
   
   for keyReponse, value in request.POST.items() :
     if keyReponse == saveResponse:
-      print('function')
       score += 1
-  
+      
   if int(limit) <= counter :
     template = loader.get_template('pageResult.html')
-    limit = 0
     counter = 0
     context = {
       'response' : saveResponse,
@@ -113,13 +108,3 @@ def response(request):
       'score': score
     }
     return HttpResponse(template.render(context,request))
-
-#pageResult
-def result(request):
-  
-  template = loader.get_template('pageChoicesOptions.html')
-  
-  context = {
-    'response' : ""
-  }
-  return HttpResponse(template.render(context,request))
